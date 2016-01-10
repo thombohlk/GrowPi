@@ -1,0 +1,7 @@
+.settings
+.classpath
+.project
+bin/
+ini/general.ini
+target/*
+lib/TEMPer2/*.o
