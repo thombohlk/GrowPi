@@ -1,5 +1,4 @@
-import io.IniReader;
-import io.Thermometer;
+package com.growpi;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,6 +8,9 @@ import org.influxdb.dto.Point;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
+
+import com.growpi.io.IniReader;
+import com.growpi.io.Thermometer;
 
 public class GrowPiServer implements Runnable {
 

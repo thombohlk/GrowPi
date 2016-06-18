@@ -1,5 +1,4 @@
-import io.BoincPreferenceEditor;
-import io.IniReader;
+package com.growpi;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -10,12 +9,14 @@ import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.Point;
 
-import cli.CLI;
+import com.growpi.cli.CLI;
+import com.growpi.io.BoincPreferenceEditor;
+import com.growpi.io.IniReader;
 
 public class Boinc {
 
-    protected static final String SERVICE_COMMAND_START = "start";
-    protected static final String SERVICE_COMMAND_STOP = "stop";
+    protected static final String SERVICE_COMMAND_START = "always";
+    protected static final String SERVICE_COMMAND_STOP = "never";
 
     protected InfluxDB db;
 
@@ -52,8 +53,9 @@ public class Boinc {
     }
 
     protected void instructService(String instruction) {
-        String command = "service boinc-client " + instruction;
-        CLI.execute(command, true);
+        String password = IniReader.read("boinc", "password");
+        String[] command = {"boinccmd", "--passwd", password, "--set_run_mode", instruction};
+        CLI.execute(command);
     }
 
 }

@@ -3,5 +3,7 @@
 .project
 bin/
 ini/general.ini
-target/*
+build/*
+gradle/
+.gradle/
 lib/TEMPer2/*.o

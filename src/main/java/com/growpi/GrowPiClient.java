@@ -1,4 +1,6 @@
-import io.IniReader;
+package com.growpi;
+
+import com.growpi.io.IniReader;
 
 import java.io.IOException;
 
