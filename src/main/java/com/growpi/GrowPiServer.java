@@ -21,7 +21,7 @@ public class GrowPiServer implements Runnable {
         thermometer = new Thermometer();
 
         try {
-            jedis = new Jedis("192.168.0.16");
+            jedis = new Jedis(IniReader.read("redis", "ip"));
             jedis.connect();
         } catch (JedisConnectionException e) {
             System.out.println("Error: could not connect to Redis");
