@@ -7,6 +7,11 @@ import java.io.IOException;
 public class CLI {
 
     public static void execute(String[] cmd) {
+        StringBuilder strBuilder = new StringBuilder();
+        for (int i = 0; i < cmd.length; i++) {
+               strBuilder.append(cmd[i] + " ");
+        }
+        System.out.println("Executing command: " + strBuilder.toString());
         try {
             ProcessBuilder pb = new ProcessBuilder(cmd);
             Process ps = pb.start();

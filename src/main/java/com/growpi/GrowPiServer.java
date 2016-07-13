@@ -54,6 +54,7 @@ public class GrowPiServer implements Runnable {
     }
 
     protected void logTemperature(String field, double currentTemperature) {
+        System.out.println("Measured " + field + ": " + currentTemperature);
         InfluxDB db = InfluxDBFactory.connect(
                 IniReader.read("influxdb", "ip"),
                 IniReader.read("influxdb", "username"),
