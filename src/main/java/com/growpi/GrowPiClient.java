@@ -1,8 +1,7 @@
 package com.growpi;
 
+import com.eden314.jboinc.Boinc;
 import com.growpi.io.IniReader;
-
-import java.io.IOException;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
@@ -12,7 +11,7 @@ public class GrowPiClient extends JedisPubSub implements Runnable {
     protected Boinc boinc;
 
     public GrowPiClient() {
-        boinc = new Boinc();
+        boinc = new Boinc(IniReader.read("boinc", "password"));
     }
 
     @Override
@@ -37,7 +36,7 @@ public class GrowPiClient extends JedisPubSub implements Runnable {
     protected void onBoincMessage(String message) {
         switch (message) {
         case "start":
-            boinc.start(1);
+            boinc.start();
             break;
         case "stop":
             boinc.stop();
