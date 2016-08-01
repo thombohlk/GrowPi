@@ -1,0 +1,16 @@
+machine:
+  services:
+    - docker
+
+test:
+  post:
+    - gradle build
+    - cp build/libs/*.jar $CIRCLE_ARTIFACTS
+    - docker build -t eden314/growpi .
+    
+deployment:
+  hub: 
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push eden314/growpi

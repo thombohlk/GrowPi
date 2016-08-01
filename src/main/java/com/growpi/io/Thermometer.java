@@ -17,13 +17,11 @@ public class Thermometer {
     }
 
     public double readInsideTemperature() {
-        TemperatureObject temperatures = this.readCurrentTemperatures();
-        return temperatures.getInsideTemperature();
+        return this.readCurrentTemperatures().getInsideTemperature();
     }
 
     public double readOutsideTemperature() {
-        TemperatureObject temperatures = this.readCurrentTemperatures();
-        return temperatures.getOutsideTemperature();
+        return this.readCurrentTemperatures().getOutsideTemperature();
     }
 
 }
