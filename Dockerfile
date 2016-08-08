@@ -8,7 +8,7 @@ ENV TZ Europe/Berlin
 # Boinc, from laurentmalvert/docker-boinc
 
 RUN apt-get update &&                           \
-    apt-get -q install -y boinc-client &&       \
+    apt-get -q install -y boinc-client libusb-dev &&       \
     apt-get clean &&                            \
     rm -rf /var/lib/apt/lists/*
 
@@ -21,11 +21,10 @@ EXPOSE \
 
 # default environment variables
 ENV ROLE = client
-ENV CENTRAL_HUB_IP = localhost
 
 # eden314
 ADD build/libs/GrowPi-0.1.jar .
-ADD start.sh .
+ADD startInstance.sh .
 
 # start
-ENTRYPOINT ["sudo", "./start."]
+ENTRYPOINT ["./startInstance.sh"]

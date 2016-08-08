@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ROLE=${ROLE:-client}
-CENTRAL_HUB_IP=${CENTRAL_HUB_IP:-localhost}
+INFLUXDB_IP=${INFLUXDB_IP:-influxdb}
+REDIS_IP=${REDIS_IP:-redis}
 PROJECT_URL=$PROJECT_URL
 PROJECT_AUTH=$PROJECT_AUTH
 CONFIG_FILE_NAME=ini/general.ini
@@ -18,20 +19,20 @@ fi
 # write configuration file
 mkdir ini
 echo "[influxdb]" > $CONFIG_FILE_NAME
-echo "username = pi" >> $CONFIG_FILE_NAME
+echo "username = root" >> $CONFIG_FILE_NAME
 echo "password = eden314@pi" >> $CONFIG_FILE_NAME
-echo "ip = http://$CENTRAL_HUB_IP:8086" >> $CONFIG_FILE_NAME
+echo "ip = http://$INFLUXDB_IP:8086" >> $CONFIG_FILE_NAME
 echo "dbname = grow_pi" >> $CONFIG_FILE_NAME
 echo "" >> $CONFIG_FILE_NAME
 echo "[redis]" >> $CONFIG_FILE_NAME
-echo "ip = $CENTRAL_HUB_IP" >> $CONFIG_FILE_NAME
+echo "ip = $REDIS_IP" >> $CONFIG_FILE_NAME
 echo "" >> $CONFIG_FILE_NAME
 echo "[boinc]" >> $CONFIG_FILE_NAME
 echo "password = $BOINC_PASSWORD" >> $CONFIG_FILE_NAME
 
 
 # start boinc and join
-boinc --daemon
+start-stop-daemon -u boinc -d /var/lib/boinc-client/ --start --startas /usr/bin/boinc -- --daemon
 sleep 3 # so boinc has time to start up before project is added
 boinccmd --project_attach $PROJECT_URL $PROJECT_AUTH
 
